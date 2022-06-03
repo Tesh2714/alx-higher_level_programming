@@ -1,8 +1,16 @@
 #!/usr/bin/python3
+from sys import argv
+
+def main():
+    print('{} argument'.format(len(argv) - 1), end='')
+    if len(argv) == 1:
+        print('s.')
+    elif len(argv) == 2:
+        print(':')
+    else:
+        print('s:')
+    for i in range(1, len(argv)):
+        print('{}: {}'.format(i, argv[i]))
+        
 if __name__ == "__main__":
-    from sys import argv
-    ln = len(argv)
-    print("{:d} {:s}{:s}".format(ln - 1, "argument" if ln <= 2 else "arguments", "." if ln == 1 else ":"))
-    for i, s in enumerate(argv):
-        if i > 0:
-            print("{:d}: {:s}".format(i, s))
+    main()
