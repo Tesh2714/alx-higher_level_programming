@@ -59,14 +59,14 @@ class Square:
                 self.__size = value
 
         
-        def my_print(self):
-            """prints the square
+    def my_print(self):
+        """prints the square
 
-            Returns:
-                None
-            """
-            if self.__size == 0:
-                print()
-                return
-            for i in range(self.__size):
-                print("".join(["#" for j in range(self.__size)]))
+        Returns:
+            None
+        """
+        if self.__size == 0:
+            print()
+            return
+        for i in range(self.__size):
+            print("".join(["#" for j in range(self.__size)]))
