@@ -68,4 +68,4 @@ class TestMaxInteger(unittest.TestCase):
             max_integer(string)
             
 if __name__ == "__main__":
-    unittest.main()i
+    unittest.main()
