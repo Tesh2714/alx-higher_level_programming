@@ -16,7 +16,7 @@ Square = square.Square
 
 
 class TestSquareDocs(unittest.TestCase):
-        """Tests the Square class' style and documentation"""
+    """Tests the Square class' style and documentation"""
     @classmethod
     def setUpClass(cls):
         """Set up for the doc tests"""

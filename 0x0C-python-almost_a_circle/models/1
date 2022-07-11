@@ -54,20 +54,20 @@ class Base:
             dummy = cls(1)
         dummy.update(**dictionary)
         return dummy
-
+    
     @classmethod
     def load_from_file(cls):
         filename = cls.__name__ + ".json"
-        ll = []
+        l = []
         try:
             with open(filename, 'r') as f:
-                ll = cls.from_json_string(f.read())
+                l = cls.from_json_string(f.read())
             for i, e in enumerate(l):
-                ll[i] = cls.create(**ll[i])
-        except vaiueError as e:
-            logger.exception(e)
-        return ll
-
+                l[i] = cls.create(**l[i])
+        except:
+            pass
+        return l
+    
     @classmethod
     def save_to_file_csv(cls, list_objs):
         """serializes a list of Rectangles/Squares in csv"""
@@ -76,43 +76,36 @@ class Base:
             csv_writer = csv.writer(csvfile)
             if cls.__name__ is "Rectangle":
                 for obj in list_objs:
-                    csv_writer.writerow(
-                            [obj.id, obj.width,
-                             obj.height, obj.x, obj.y])
+                    csv_writer.writerow([obj.id, obj.width, obj.height,obj.x, obj.y])
 
             elif cls.__name__ is "Square":
                 for obj in list_objs:
                     csv_writer.writerow([obj.id, obj.size, obj.x, obj.y])
-
+                
     @classmethod
     def load_from_file_csv(cls):
         """deserializes a list of Rectangles/Squares in csv"""
         filename = cls.__name__ + ".csv"
-        ls = []
+        l = []
         try:
             with open(filename, 'r') as csvfile:
                 csv_reader = csv.reader(csvfile)
                 for args in csv_reader:
                     if cls.__name__ is "Rectangle":
-                        dictionary = {
-                            "id": int(args[0]),
-                            "width": int(args[1]),
-                            "height": int(args[2]),
-                            "x": int(args[3]),
-                            "y": int(args[4])
-                                }
+                        dictionary = {"id": int(args[0]),
+                                "width": int(args[1]),
+                                "height": int(args[2]),
+                                "x": int(args[3]),
+                                "y": int(args[4])}
                     elif cls.__name__ is "Square":
-                        dictionary = {
-                                "id": int(args[0]),
-                                "size": int(args[1]),
-                                "x": int(args[2]),
-                                "y": int(args[3])}
+                        dictionary = {"id": int(args[0]), "size": int(args[1]),
+                                "x": int(args[2]), "y": int(args[3])}
                     obj = cls.create(**dictionary)
-                    ls.append(obj)
-        except ValueError as e:
-            logger.exception(e)
-        return ls
-
+                    l.append(obj)
+        except:
+            pass
+        return l
+    
     @staticmethod
     def draw(list_rectangles, list_squares):
         """opens a window and draws all the Rectangles and Squares"""
@@ -121,9 +114,8 @@ class Base:
         row_width = padding
         row_height = 0
         screen_height = padding
-        color_list = [
-                'red', 'orange', 'yellow', 'green',
-                'blue', 'indigo', 'violet']
+        color_list = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo',
+                'violet']
         color_size = len(color_list)
         color_index = 0
         for rect in list_rectangles:
@@ -136,7 +128,7 @@ class Base:
                 screen_height += row_height + padding
                 row_width = rect.width + rect.x + padding * 2
                 row_height = rect.height + rect.y
-
+                
         for square in list_squares:
             potential_width = row_width + square.size + square.x + padding
             if (row_width == padding or potential_width < screen_width):
@@ -198,6 +190,8 @@ class Base:
             turtle.left(90)
             turtle.forward(rect.y)
             turtle.right(90)
+            
+            
         for square in list_squares:
             potential_width = row_width + square.size + square.x + padding
             if (row_width == padding or potential_width < screen_width):
@@ -238,4 +232,6 @@ class Base:
             turtle.left(90)
             turtle.forward(square.y)
             turtle.right(90)
+
+            
         turtle.getscreen()._root.mainloop()

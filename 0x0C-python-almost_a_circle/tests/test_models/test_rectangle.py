@@ -145,7 +145,7 @@ class TestRectangle(unittest.TestCase):
 
             
     def test_height_valueerror(self):
-    """Test ints <= 0 for height"""
+        """Test ints <= 0 for height"""
     
     with self.assertRaisesRegex(ValueError, "height must be > 0"):
         r = Rectangle(1, -1)
