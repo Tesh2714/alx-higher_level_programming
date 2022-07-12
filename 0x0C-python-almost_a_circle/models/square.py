@@ -12,23 +12,23 @@ class Square(Rectangle):
         """initializes the square"""
         super().__init__(size, size, x, y, id)
         self.size = size
-        
+
     @property
     def size(self):
         """getter for size"""
         return self.width
-    
+
     @size.setter
     def size(self, value):
         """setter for size"""
         self.width = value
         self.height = value
-        
+
     def __str__(self):
         """informal string representation of the square"""
         return "[Square] ({:d}) {:d}/{:d} - {:d}".format(self.id, self.x,
-                self.y, self.width)
-        
+                                                         self.y, self.width)
+
     def update(self, *args, **kwargs):
         """update attributes"""
         if len(args):
@@ -50,7 +50,7 @@ class Square(Rectangle):
                 self.x = kwargs["x"]
             if "y" in kwargs:
                 self.y = kwargs["y"]
-                
+
     def to_dictionary(self):
         """dictionary representation of a Square"""
         d = {}
